@@ -33,6 +33,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         conexao = ModuloConexao.conector();
         clienteController = new ClienteController(this, conexao);
+        pesquisar_cliente();
     }
 
     public void exibirUsuario(ClienteModel cliente) {

@@ -4,7 +4,10 @@
  */
 package com.gsoftwareacad.telas;
 
+import com.gsoftwareacad.Model.PlanosModel;
+import com.gsoftwareacad.controller.PlanoController;
 import com.gsoftwareacad.icones.ImageUtils;
+import java.awt.List;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -22,12 +25,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
         initLogo();
+
     }
+
+
     private void initLogo() {
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/com/gsoftwareacad/icones/LogoOficialSemFundo.png"));
         ImageIcon resizedIcon = ImageUtils.resizeImageIcon(originalIcon, 200, 150);
         lblLogo.setIcon(resizedIcon);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,12 +54,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mencadFun = new javax.swing.JMenuItem();
         menCadUsu = new javax.swing.JMenuItem();
         menCadPlan = new javax.swing.JMenuItem();
-        menPla = new javax.swing.JMenu();
-        menPlaTip = new javax.swing.JMenuItem();
+        menPag = new javax.swing.JMenu();
+        megEftPag = new javax.swing.JMenuItem();
         menAju = new javax.swing.JMenu();
         menAjuSob = new javax.swing.JMenuItem();
         menOpc = new javax.swing.JMenu();
         menOpcSai = new javax.swing.JMenuItem();
+        menTelaPag = new javax.swing.JMenu();
+        menCliPag = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal - Gsoftware");
@@ -73,7 +82,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 505, Short.MAX_VALUE)
         );
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/gsoftwareacad/icones/LogoOficialSemFundo.png"))); // NOI18N
@@ -130,13 +139,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menu.add(menCad);
 
-        menPla.setText("Planos");
+        menPag.setText("Pagamentos");
 
-        menPlaTip.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        menPlaTip.setText("Tipos De Planos");
-        menPla.add(menPlaTip);
+        megEftPag.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        megEftPag.setText("Tipos De Planos");
+        megEftPag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                megEftPagActionPerformed(evt);
+            }
+        });
+        menPag.add(megEftPag);
 
-        menu.add(menPla);
+        menu.add(menPag);
 
         menAju.setText("Ajuda");
         menAju.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +183,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menu.add(menOpc);
 
+        menTelaPag.setText("Clientes");
+        menTelaPag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menTelaPagActionPerformed(evt);
+            }
+        });
+
+        menCliPag.setText("Clientes Pagantes");
+        menCliPag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCliPagActionPerformed(evt);
+            }
+        });
+        menTelaPag.add(menCliPag);
+
+        menu.add(menTelaPag);
+
         setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,11 +222,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(133, 133, 133)
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,26 +241,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         TelaSobre sobre = new TelaSobre();
         sobre.setVisible(true);
-        
+
     }//GEN-LAST:event_menAjuSobActionPerformed
 
     private void menOpcSaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menOpcSaiActionPerformed
-        
-        int sair = JOptionPane.showConfirmDialog(null,"Tem certeza que deseja sair?","Atenção",JOptionPane.YES_NO_OPTION);
+
+        int sair = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Atenção", JOptionPane.YES_NO_OPTION);
 
         if (sair == JOptionPane.YES_OPTION) {
             // Código para sair do programa
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_menOpcSaiActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
         Date data = new Date();
         DateFormat formatador = DateFormat.getDateInstance(DateFormat.SHORT);
         lblData.setText(formatador.format(data));
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void menAjuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAjuActionPerformed
@@ -237,15 +268,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menAjuActionPerformed
 
     private void menCadPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadPlanActionPerformed
-        // TODO add your handling code here:
+        TelaPlanos plano = new TelaPlanos();
+        plano.setVisible(true);
+        desktop.add(plano);
     }//GEN-LAST:event_menCadPlanActionPerformed
 
     private void menCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadUsuActionPerformed
-       
+
         TelaUsuario usuario = new TelaUsuario();
         usuario.setVisible(true);
         desktop.add(usuario);
-        
+
     }//GEN-LAST:event_menCadUsuActionPerformed
 
     private void menCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCliActionPerformed
@@ -258,8 +291,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaFuncionario funcionario = new TelaFuncionario();
         funcionario.setVisible(true);
         desktop.add(funcionario);
-        
+
     }//GEN-LAST:event_mencadFunActionPerformed
+
+    private void megEftPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_megEftPagActionPerformed
+        TelaPagamentos pagamenento = new TelaPagamentos();
+        pagamenento.setVisible(true);
+        desktop.add(pagamenento);
+    }//GEN-LAST:event_megEftPagActionPerformed
+
+    private void menTelaPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menTelaPagActionPerformed
+
+    }//GEN-LAST:event_menTelaPagActionPerformed
+
+    private void menCliPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliPagActionPerformed
+        TelaClientesPagantes clipag = new TelaClientesPagantes();
+        clipag.setVisible(true);
+        desktop.add(clipag);
+    }//GEN-LAST:event_menCliPagActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,16 +350,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblLogo;
     public static javax.swing.JLabel lblUsuario;
+    private javax.swing.JMenuItem megEftPag;
     private javax.swing.JMenu menAju;
     private javax.swing.JMenuItem menAjuSob;
     private javax.swing.JMenu menCad;
     private javax.swing.JMenuItem menCadCli;
     public static javax.swing.JMenuItem menCadPlan;
     public static javax.swing.JMenuItem menCadUsu;
+    private javax.swing.JMenuItem menCliPag;
     private javax.swing.JMenu menOpc;
     private javax.swing.JMenuItem menOpcSai;
-    private javax.swing.JMenu menPla;
-    private javax.swing.JMenuItem menPlaTip;
+    private javax.swing.JMenu menPag;
+    private javax.swing.JMenu menTelaPag;
     public static javax.swing.JMenuItem mencadFun;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
